@@ -43,5 +43,50 @@ router.post('/', (req, res) => {
       res.status(500).json({ message: "Darn, failed to store car data..." });
     });
   });
+
+router.put('/:id', (req, res) => {
+  const changes = req.body;
+  db('cars')
+    .where({ id: req.params.id })
+    .update(changes)
+    .then(count => {
+        if(count > 0) {
+            res.status(200).json({ 
+                message: 'Car updated successfully'
+            })
+        } else {
+            res.status(404).json({ 
+                message: 'Car not found'
+              })
+        }
+    })
+    .catch(error => {
+        res.status(500).json({ 
+            message: 'Oh no! There was an error!'
+        })
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  db('cars')
+      .where({ id: req.params.id })
+      .del()
+      .then(count => {
+          if(count > 0) {
+              res.status(200).json({ 
+                  message: 'Car deleted successfully'
+               })
+          } else {
+              res.status(404).json({ 
+                  message: 'That car could not be found 🤷🏽‍♀️'
+               })
+          }
+      })
+      .catch(error => {
+          res.status(500).json({
+              message: 'Oops we ran into an error'
+          });
+      });
+});
   
   module.exports = router;
