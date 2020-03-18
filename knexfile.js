@@ -5,7 +5,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: '/data/car-dealer.db3'
+      filename: './data/car-dealer.db3'
     }
     
   },
@@ -43,3 +43,15 @@ module.exports = {
   }
 
 };
+
+// npm i -g knex
+// knex init
+// move the object from connecttion.js into the development property on knexfile.js
+
+// update connection.js to require knexfile and use the development property as the knexConfig
+
+// create a migration with knex migrate:make vegetables
+
+// change the db name inside knexfile.js
+
+// run the migration with knex migrate:latest
