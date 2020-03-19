@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
     .where({ id })
     .first()
     .then(car => {
-        res.json(fruit);
+        res.status(200).json(car);
     })
     .catch(err => {
         res.status(500).json({ message: "Oh no, we couldn't grab that car..."})
